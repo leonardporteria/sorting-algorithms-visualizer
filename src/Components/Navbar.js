@@ -3,7 +3,7 @@ const Navbar = () => {
     <div className=' flex'>
       <h1>SORTING ALGORITHMS </h1>
       <div>
-        <p>algoss</p>
+        <p>algo</p>
       </div>
     </div>
   );
