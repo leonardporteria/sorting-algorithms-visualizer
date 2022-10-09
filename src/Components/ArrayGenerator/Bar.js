@@ -2,7 +2,7 @@ const Bar = ({ height, width }) => {
   return (
     <div
       style={{
-        width: `${width}px`,
+        width: `${width}%`,
         height: `${height}px`,
         backgroundColor: 'turquoise',
       }}

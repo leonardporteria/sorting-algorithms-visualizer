@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Bar from './ArrayGenerator/Bar';
+import Chart from './ArrayGenerator/Chart';
 
 const Main = ({ arrayLength, sortingSpeed, hasStarted }) => {
   let array = [];
@@ -10,7 +10,7 @@ const Main = ({ arrayLength, sortingSpeed, hasStarted }) => {
 
   const handleArrayRandomizer = () => {
     for (let i = 0; i < arrayLength; i++) {
-      array.push(randomIntFromInterval(5, 100));
+      array.push(randomIntFromInterval(5, 250));
     }
   };
 
@@ -27,13 +27,12 @@ const Main = ({ arrayLength, sortingSpeed, hasStarted }) => {
       </div>
 
       {handleArrayRandomizer()}
-      <div className='flex gap-1 w-screen h-96 bg-slate-500'>
-        {array.map((bar, index) => (
-          <Bar key={index} height={bar} width={1} index={index} />
-        ))}
-      </div>
+      <Chart array={array} arrayLength={arrayLength} />
     </div>
   );
 };
 
 export default Main;
+
+
+// USEREF FOR EDITING ARRAY

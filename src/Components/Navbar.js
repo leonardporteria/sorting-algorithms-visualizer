@@ -95,7 +95,7 @@ const Navbar = () => {
           {/* GENERATE NEW ARRAY */}
           <div className='flex items-center justify-center'>
             <button
-              className='w-full p-4 text-gray-800 bg-gray-200'
+              className='w-full bg-gray-200 p-4 text-gray-800'
               onClick={handleGenerateArray}
             >
               Generate New Array
@@ -105,7 +105,7 @@ const Navbar = () => {
           {/* START / TERMINATE SORTING */}
           <div className='flex items-center justify-center'>
             <button
-              className='w-full p-4 text-gray-800 bg-gray-200'
+              className='w-full bg-gray-200 p-4 text-gray-800'
               onClick={handleHasStarted}
             >
               Start
