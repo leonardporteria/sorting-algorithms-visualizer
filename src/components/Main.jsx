@@ -1,21 +1,29 @@
 import { useEffect } from 'react';
-import Chart from './ArrayGenerator/Chart';
 
-const Main = ({ arrayLength, sortingSpeed, hasStarted }) => {
-  let array = [];
+import Chart from './generator/Chart';
 
+const Main = ({
+  algorithm,
+  array,
+  arrayLength,
+  onLengthChange,
+  sortingSpeed,
+  hasStarted,
+}) => {
   const randomIntFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
   const handleArrayRandomizer = () => {
+    const array = [];
     for (let i = 0; i < arrayLength; i++) {
       array.push(randomIntFromInterval(5, 250));
     }
+    onLengthChange(array);
   };
 
   useEffect(() => {
-    console.log('use effect ran');
+    handleArrayRandomizer();
   }, []);
 
   return (
@@ -26,13 +34,9 @@ const Main = ({ arrayLength, sortingSpeed, hasStarted }) => {
         <h1>Started? {`${hasStarted}`}</h1>
       </div>
 
-      {handleArrayRandomizer()}
       <Chart array={array} arrayLength={arrayLength} />
     </div>
   );
 };
 
 export default Main;
-
-
-// USEREF FOR EDITING ARRAY

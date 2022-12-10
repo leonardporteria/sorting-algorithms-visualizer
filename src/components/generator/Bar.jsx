@@ -1,4 +1,6 @@
 const Bar = ({ height, width }) => {
+  // pass useref to edit array
+
   return (
     <div
       style={{

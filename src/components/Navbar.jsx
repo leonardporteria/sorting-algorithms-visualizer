@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
 import Main from './Main';
 
@@ -22,9 +22,11 @@ const Navbar = () => {
   const [hasStarted, setHasStarted] = useState(false);
   const [isSending, setIsSendng] = useState(false);
 
-  useEffect(() => {
-    console.log('use effect ran on Navbar');
-  }, [algorithm, arrayLength, sortingSpeed]);
+  const [array, setArray] = useState([]);
+
+  const handleOnLengthChange = useCallback((newArray) => {
+    setArray(newArray);
+  }, []);
 
   const handleAlgorithmChange = (event) => {
     setAlgorithm(event.target.value);
@@ -39,13 +41,14 @@ const Navbar = () => {
     setIsSendng(!isSending);
   };
   const handleHasStarted = () => {
+    console.log(array);
     setHasStarted(!hasStarted);
   };
 
   return (
     <>
       <div className='flex flex-col'>
-        <h1 className='text-center text-3xl'>SORTING ALGORITHMS</h1>
+        <h1 className='text-center text-3xl'>Sorting Algorithms Visualizer</h1>
         <div className='flex justify-evenly '>
           {/* ALGORITHM DROP DOWN */}
           <div className='flex flex-col items-center justify-center'>
@@ -54,7 +57,7 @@ const Navbar = () => {
             <select
               value={algorithm}
               onChange={handleAlgorithmChange}
-              className='py-1 text-2xl text-gray-700'
+              className='cursor-pointer p-4 text-md text-gray-800 bg-gray-200'
             >
               {algorithmOptions.map((option) => (
                 <option value={option.value} key={option.value}>
@@ -95,7 +98,7 @@ const Navbar = () => {
           {/* GENERATE NEW ARRAY */}
           <div className='flex items-center justify-center'>
             <button
-              className='w-full bg-gray-200 p-4 text-gray-800'
+              className='w-full bg-gray-200 text-gray-800  p-4 text-md'
               onClick={handleGenerateArray}
             >
               Generate New Array
@@ -105,7 +108,7 @@ const Navbar = () => {
           {/* START / TERMINATE SORTING */}
           <div className='flex items-center justify-center'>
             <button
-              className='w-full bg-gray-200 p-4 text-gray-800'
+              className='w-full bg-gray-200 text-gray-800  p-4 text-md'
               onClick={handleHasStarted}
             >
               Start
@@ -115,7 +118,10 @@ const Navbar = () => {
       </div>
 
       <Main
+        algorithm={algorithm}
+        array={array}
         arrayLength={arrayLength}
+        onLengthChange={handleOnLengthChange}
         sortingSpeed={sortingSpeed}
         hasStarted={hasStarted}
       />
