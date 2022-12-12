@@ -24,7 +24,7 @@ const Main = ({
 
   useEffect(() => {
     handleArrayRandomizer();
-  }, []);
+  }, [arrayLength]);
 
   return (
     <div>

@@ -20,7 +20,6 @@ const Navbar = () => {
   const [arrayLength, setArrayLength] = useState(125);
   const [sortingSpeed, setSortingSpeed] = useState(5);
   const [hasStarted, setHasStarted] = useState(false);
-  const [isSending, setIsSendng] = useState(false);
 
   const [array, setArray] = useState([]);
 
@@ -28,6 +27,7 @@ const Navbar = () => {
     setArray(newArray);
   }, []);
 
+  // handle event changes
   const handleAlgorithmChange = (event) => {
     setAlgorithm(event.target.value);
   };
@@ -38,11 +38,45 @@ const Navbar = () => {
     setSortingSpeed(parseInt(event.target.value));
   };
   const handleGenerateArray = () => {
-    setIsSendng(!isSending);
+    const array = [];
+    for (let i = 0; i < arrayLength; i++) {
+      array.push(Math.floor(Math.random() * (250 - 5 + 1) + 5));
+    }
+    setArray(array);
   };
-  const handleHasStarted = () => {
+  const handleHasStarted = async () => {
     console.log(array);
+    bblSort(array);
     setHasStarted(!hasStarted);
+    console.log(array);
+  };
+
+  const delay = async () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(true);
+      }, sortingSpeed);
+    });
+  };
+
+  // Creating the bblSort function
+  const bblSort = async (arr) => {
+    for (let i = 0; i < arr.length; i++) {
+      // Last i elements are already in place
+      for (let j = 0; j < arr.length - i - 1; j++) {
+        await delay();
+        // Checking if the item at present iteration
+        // is greater than the next iteration
+        if (arr[j] > arr[j + 1]) {
+          // If the condition is true then swap them
+          let temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    // Print the sorted array
+    console.log(arr);
   };
 
   return (
