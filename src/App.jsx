@@ -1,10 +1,13 @@
+import Header from './components/Hearder';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Visualizer from './components/Visualizer';
 
 function App() {
   return (
     <div className='flex flex-col min-w-screen min-h-screen overflow-x-hidden bg-slate-900 font-poppins text-gray-50'>
-      <Navbar />
+      <Header />
+      <Visualizer />
       <Footer />
     </div>
   );

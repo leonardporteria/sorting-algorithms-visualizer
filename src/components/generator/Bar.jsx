@@ -1,12 +1,10 @@
-const Bar = ({ height, width }) => {
-  // pass useref to edit array
-
+const Bar = ({ height, width, color }) => {
   return (
     <div
       style={{
         width: `${width}%`,
         height: `${height}px`,
-        backgroundColor: 'turquoise',
+        backgroundColor: `${color}`,
       }}
     />
   );

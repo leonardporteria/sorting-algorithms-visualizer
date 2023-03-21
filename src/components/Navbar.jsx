@@ -2,6 +2,8 @@ import { useState, useCallback } from 'react';
 
 import Main from './Main';
 
+import { delayInMilliseconds } from '../utils/HelperFunctions';
+
 const Navbar = () => {
   const algorithmOptions = [
     { label: 'Bubble Sort', value: 'Bubble Sort' },
@@ -21,6 +23,8 @@ const Navbar = () => {
   const [sortingSpeed, setSortingSpeed] = useState(5);
   const [hasStarted, setHasStarted] = useState(false);
 
+  // array of object
+  // {value: number, color: hex}
   const [array, setArray] = useState([]);
 
   const handleOnLengthChange = useCallback((newArray) => {
@@ -31,7 +35,7 @@ const Navbar = () => {
   const handleAlgorithmChange = (event) => {
     setAlgorithm(event.target.value);
   };
-  const handleArrayChange = (event) => {
+  const handleArrayLengthChange = (event) => {
     setArrayLength(parseInt(event.target.value));
   };
   const handleSpeedChange = (event) => {
@@ -46,17 +50,9 @@ const Navbar = () => {
   };
   const handleHasStarted = async () => {
     console.log(array);
-    bblSort(array);
+    await bblSort(array);
     setHasStarted(!hasStarted);
     console.log(array);
-  };
-
-  const delay = async () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(true);
-      }, sortingSpeed);
-    });
   };
 
   // Creating the bblSort function
@@ -64,19 +60,28 @@ const Navbar = () => {
     for (let i = 0; i < arr.length; i++) {
       // Last i elements are already in place
       for (let j = 0; j < arr.length - i - 1; j++) {
-        await delay();
+        await delayInMilliseconds(sortingSpeed);
         // Checking if the item at present iteration
         // is greater than the next iteration
-        if (arr[j] > arr[j + 1]) {
+        if (arr[j].value > arr[j + 1].value) {
           // If the condition is true then swap them
-          let temp = arr[j];
-          arr[j] = arr[j + 1];
-          arr[j + 1] = temp;
+          arr[j + 1].color = '#d0312d';
+          arr[j].color = '#ffffff';
+
+          let temp = arr[j].value;
+          arr[j].value = arr[j + 1].value;
+          arr[j + 1].value = temp;
+
+          setArray([...arr]);
         }
+        arr[j + 1].color = '#d0312d';
+        arr[j].color = '#ffffff';
       }
     }
-    // Print the sorted array
-    console.log(arr);
+    // reset color
+    for (let j = 0; j < arr.length; j++) {
+      arr[j].color = '#ffffff';
+    }
   };
 
   return (
@@ -110,7 +115,7 @@ const Navbar = () => {
               max='250'
               step='1'
               value={arrayLength}
-              onChange={handleArrayChange}
+              onChange={handleArrayLengthChange}
               className='w-60'
             />
           </div>

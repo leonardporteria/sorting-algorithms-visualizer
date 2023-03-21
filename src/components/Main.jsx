@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { randomIntFromInterval } from '../utils/HelperFunctions';
+
 import Chart from './generator/Chart';
 
 const Main = ({
@@ -10,14 +12,10 @@ const Main = ({
   sortingSpeed,
   hasStarted,
 }) => {
-  const randomIntFromInterval = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
-
   const handleArrayRandomizer = () => {
     const array = [];
     for (let i = 0; i < arrayLength; i++) {
-      array.push(randomIntFromInterval(5, 250));
+      array.push({ value: randomIntFromInterval(5, 250), color: '#ffffff' });
     }
     onLengthChange(array);
   };
