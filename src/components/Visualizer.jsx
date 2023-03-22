@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { BubbleSort } from '../algorithms/BubbleSort';
+import { CocktailShaker } from '../algorithms/CocktailShaker';
 
 import { randomIntFromInterval } from '../utils/HelperFunctions';
 
@@ -50,10 +51,34 @@ const Visualizer = () => {
     setArray(array);
   };
   const handleHasStarted = async () => {
-    console.log(array);
     setHasStarted(!hasStarted);
-    await BubbleSort(array, sortingSpeed, setArray);
-    console.log(array);
+    switch (algorithm) {
+      case 'Bubble Sort':
+        await BubbleSort(array, sortingSpeed, setArray);
+        break;
+      case 'Merge Sort':
+        break;
+      case 'Insertion Sort':
+        break;
+      case 'Selection Sort':
+        break;
+      case 'Quick Sort [Lomuto]':
+        break;
+      case 'Quick Sort [Hoare]':
+        break;
+      case 'Heap Sort':
+        break;
+      case 'Cocktail Shaker':
+        await CocktailShaker(array, sortingSpeed, setArray);
+        break;
+      case 'Radix Sort':
+        break;
+      case 'Bogo Sort':
+        break;
+      default:
+        setHasStarted(!hasStarted);
+        break;
+    }
   };
 
   // GENERATE A RANDOM ARRAY UPON LOADING
@@ -125,7 +150,7 @@ const Visualizer = () => {
         </div>
       </div>
 
-      <Chart array={array} arrayLength={arrayLength} />
+      <Chart array={array} />
     </div>
   );
 };

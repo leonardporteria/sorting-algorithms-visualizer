@@ -1,6 +1,6 @@
 import Bar from './Bar';
 
-const Chart = ({ array, arrayLength }) => {
+const Chart = ({ array }) => {
   return (
     <div className='flex gap-1  items-end m-auto p-1 h-72 w-11/12 bg-slate-800 '>
       {array.map((bar, index) => (
