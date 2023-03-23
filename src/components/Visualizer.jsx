@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 
 import { BubbleSort } from '../algorithms/BubbleSort';
 import { CocktailShaker } from '../algorithms/CocktailShaker';
+import { InsertionSort } from '../algorithms/InsertionSort';
+import { SelectionSort } from '../algorithms/SelectionSort';
+import { MergeSort } from '../algorithms/MergeSort';
 
 import { randomIntFromInterval } from '../utils/HelperFunctions';
 
@@ -23,7 +26,7 @@ const Visualizer = () => {
   ];
 
   // defrault states
-  const [algorithm, setAlgorithm] = useState('Bubble Sort');
+  const [algorithm, setAlgorithm] = useState('Merge Sort');
   const [arrayLength, setArrayLength] = useState(125);
   const [sortingSpeed, setSortingSpeed] = useState(5);
   const [hasStarted, setHasStarted] = useState(false);
@@ -50,17 +53,20 @@ const Visualizer = () => {
     }
     setArray(array);
   };
-  const handleHasStarted = async () => {
+  const handleStart = async () => {
     setHasStarted(!hasStarted);
     switch (algorithm) {
       case 'Bubble Sort':
         await BubbleSort(array, sortingSpeed, setArray);
         break;
       case 'Merge Sort':
+        await MergeSort(array, sortingSpeed, setArray);
         break;
       case 'Insertion Sort':
+        await InsertionSort(array, sortingSpeed, setArray);
         break;
       case 'Selection Sort':
+        await SelectionSort(array, sortingSpeed, setArray);
         break;
       case 'Quick Sort [Lomuto]':
         break;
@@ -139,11 +145,11 @@ const Visualizer = () => {
             Generate New Array
           </button>
         </div>
-        {/* START / TERMINATE SORTING */}
+        {/* START */}
         <div className='flex items-center justify-center'>
           <button
             className='w-full bg-gray-200 text-gray-800  p-4 text-md'
-            onClick={handleHasStarted}
+            onClick={handleStart}
           >
             Start
           </button>

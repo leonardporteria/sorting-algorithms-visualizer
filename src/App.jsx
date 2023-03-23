@@ -1,5 +1,4 @@
 import Header from './components/Hearder';
-import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Visualizer from './components/Visualizer';
 
