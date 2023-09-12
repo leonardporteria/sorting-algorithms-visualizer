@@ -9,7 +9,7 @@ export const BubbleSort = async (array, sortingSpeed, setArray) => {
       await delayInMilliseconds(sortingSpeed);
       array[j + 1].color = '#d0312d';
       array[j].color = '#ffffff';
-      if (array[j].value > array[j + 1].value) {
+      if (array[j].value >= array[j + 1].value) {
         let temp = array[j].value;
         array[j].value = array[j + 1].value;
         array[j + 1].value = temp;

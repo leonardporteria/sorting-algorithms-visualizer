@@ -46,27 +46,27 @@ const Visualizer = () => {
   const handleSpeedChange = (event) => {
     setSortingSpeed(parseInt(event.target.value));
   };
-  const handleGenerateArray = () => {
+  const handleGenerateArray = async () => {
     const array = [];
     for (let i = 0; i < arrayLength; i++) {
       array.push({ value: randomIntFromInterval(5, 250), color: '#ffffff' });
     }
     setArray(array);
   };
-  const handleStart = async () => {
+  const handleStart = () => {
     setHasStarted(!hasStarted);
     switch (algorithm) {
       case 'Bubble Sort':
-        await BubbleSort(array, sortingSpeed, setArray);
+        BubbleSort(array, sortingSpeed, setArray);
         break;
       case 'Merge Sort':
-        await MergeSort(array, sortingSpeed, setArray);
+        MergeSort(array, sortingSpeed, setArray);
         break;
       case 'Insertion Sort':
-        await InsertionSort(array, sortingSpeed, setArray);
+        InsertionSort(array, sortingSpeed, setArray);
         break;
       case 'Selection Sort':
-        await SelectionSort(array, sortingSpeed, setArray);
+        SelectionSort(array, sortingSpeed, setArray);
         break;
       case 'Quick Sort [Lomuto]':
         break;
@@ -75,7 +75,7 @@ const Visualizer = () => {
       case 'Heap Sort':
         break;
       case 'Cocktail Shaker':
-        await CocktailShaker(array, sortingSpeed, setArray);
+        CocktailShaker(array, sortingSpeed, setArray);
         break;
       case 'Radix Sort':
         break;

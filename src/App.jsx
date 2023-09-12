@@ -1,4 +1,4 @@
-import Header from './components/Hearder';
+import Header from './components/Header';
 import Footer from './components/Footer';
 import Visualizer from './components/Visualizer';
 
