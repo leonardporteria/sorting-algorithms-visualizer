@@ -1,16 +1,8 @@
 import { useState, useEffect } from 'react';
 
-import { BubbleSort } from '../algorithms/BubbleSort';
-import { CocktailShaker } from '../algorithms/CocktailShaker';
-import { InsertionSort } from '../algorithms/InsertionSort';
-import { SelectionSort } from '../algorithms/SelectionSort';
-import { MergeSort } from '../algorithms/MergeSort';
-
-import { randomIntFromInterval } from '../utils/HelperFunctions';
-
 import Chart from './generator/Chart';
 
-const Visualizer = () => {
+const Visualizer = ({ globalArray }) => {
   // algorithm options
   const algorithmOptions = [
     { label: 'Bubble Sort', value: 'Bubble Sort' },
@@ -26,71 +18,22 @@ const Visualizer = () => {
   ];
 
   // defrault states
-  const [algorithm, setAlgorithm] = useState('Merge Sort');
-  const [arrayLength, setArrayLength] = useState(125);
-  const [sortingSpeed, setSortingSpeed] = useState(5);
-  const [hasStarted, setHasStarted] = useState(false);
+  const [algorithm, setAlgorithm] = useState('Bubble Sort');
 
   // array state
   // {value: number, color: hex}
-  const [array, setArray] = useState([]);
+  const [array, setArray] = useState([...globalArray]);
 
-  // EVENT HANDLERS
+  // * EVENT HANDLERS
   const handleAlgorithmChange = (event) => {
     setAlgorithm(event.target.value);
-  };
-  const handleArrayLengthChange = (event) => {
-    setArrayLength(parseInt(event.target.value));
-    handleGenerateArray();
-  };
-  const handleSpeedChange = (event) => {
-    setSortingSpeed(parseInt(event.target.value));
-  };
-  const handleGenerateArray = async () => {
-    const array = [];
-    for (let i = 0; i < arrayLength; i++) {
-      array.push({ value: randomIntFromInterval(5, 250), color: '#ffffff' });
-    }
-    setArray(array);
-  };
-  const handleStart = () => {
-    setHasStarted(!hasStarted);
-    switch (algorithm) {
-      case 'Bubble Sort':
-        BubbleSort(array, sortingSpeed, setArray);
-        break;
-      case 'Merge Sort':
-        MergeSort(array, sortingSpeed, setArray);
-        break;
-      case 'Insertion Sort':
-        InsertionSort(array, sortingSpeed, setArray);
-        break;
-      case 'Selection Sort':
-        SelectionSort(array, sortingSpeed, setArray);
-        break;
-      case 'Quick Sort [Lomuto]':
-        break;
-      case 'Quick Sort [Hoare]':
-        break;
-      case 'Heap Sort':
-        break;
-      case 'Cocktail Shaker':
-        CocktailShaker(array, sortingSpeed, setArray);
-        break;
-      case 'Radix Sort':
-        break;
-      case 'Bogo Sort':
-        break;
-      default:
-        setHasStarted(!hasStarted);
-        break;
-    }
   };
 
   // GENERATE A RANDOM ARRAY UPON LOADING
   useEffect(() => {
-    handleGenerateArray();
-  }, [arrayLength]);
+    console.log('visualizer: useeffect ran');
+    setArray(globalArray);
+  }, [globalArray]);
 
   return (
     <div>
@@ -109,50 +52,6 @@ const Visualizer = () => {
               </option>
             ))}
           </select>
-        </div>
-        {/* ARRAY LENGHT SLIDER */}
-        <div className='flex flex-col items-center justify-center'>
-          <label>Select Array Lenght</label>
-          <input
-            type='range'
-            min='50'
-            max='250'
-            step='1'
-            value={arrayLength}
-            onChange={handleArrayLengthChange}
-            className='w-60'
-          />
-        </div>
-        {/* SORTING SPEED SLIDER */}
-        <div className='flex flex-col items-center justify-center'>
-          <label>Select Sorting Speed</label>
-          <input
-            type='range'
-            min='1'
-            max='10'
-            step='1'
-            value={sortingSpeed}
-            onChange={handleSpeedChange}
-            className='w-60'
-          />
-        </div>
-        {/* GENERATE NEW ARRAY */}
-        <div className='flex items-center justify-center'>
-          <button
-            className='w-full bg-gray-200 text-gray-800  p-4 text-md'
-            onClick={handleGenerateArray}
-          >
-            Generate New Array
-          </button>
-        </div>
-        {/* START */}
-        <div className='flex items-center justify-center'>
-          <button
-            className='w-full bg-gray-200 text-gray-800  p-4 text-md'
-            onClick={handleStart}
-          >
-            Start
-          </button>
         </div>
       </div>
 
