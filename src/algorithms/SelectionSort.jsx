@@ -8,7 +8,7 @@ export const SelectionSort = async (array, sortingSpeed, setArray) => {
     let smallest = array[i].value;
     let index = i;
     for (let j = i; j < array.length; j++) {
-      if (smallest > array[j].value) {
+      if (smallest >= array[j].value) {
         await delayInMilliseconds(sortingSpeed);
         smallest = array[j].value;
 

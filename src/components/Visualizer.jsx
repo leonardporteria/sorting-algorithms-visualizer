@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 
+import { BubbleSort } from '../algorithms/BubbleSort';
+import { InsertionSort } from '../algorithms/InsertionSort';
+import { SelectionSort } from '../algorithms/SelectionSort';
+import { CocktailShaker } from '../algorithms/CocktailShaker';
+
 import Chart from './generator/Chart';
 
-const Visualizer = ({ globalArray }) => {
+const Visualizer = ({ globalArray, sortingSpeed, hasStarted }) => {
   // algorithm options
   const algorithmOptions = [
     { label: 'Bubble Sort', value: 'Bubble Sort' },
@@ -22,37 +27,58 @@ const Visualizer = ({ globalArray }) => {
 
   // array state
   // {value: number, color: hex}
-  const [array, setArray] = useState([...globalArray]);
+  const [array, setArray] = useState([]);
 
   // * EVENT HANDLERS
   const handleAlgorithmChange = (event) => {
     setAlgorithm(event.target.value);
   };
+  const handleSort = async () => {
+    console.log('sort sort');
+    CocktailShaker(array, sortingSpeed, setArray);
+    switch (algorithm) {
+      case 'Bubble Sort':
+        await BubbleSort(array, sortingSpeed, setArray);
+        break;
+      case 'Merge Sort':
+        await MergeSort(array, sortingSpeed, setArray);
+        break;
+      case 'Insertion Sort':
+        await InsertionSort(array, sortingSpeed, setArray);
+        break;
+      case 'Selection Sort':
+        await SelectionSort(array, sortingSpeed, setArray);
+        break;
+    }
+  };
 
   // GENERATE A RANDOM ARRAY UPON LOADING
   useEffect(() => {
+    if (hasStarted) {
+      console.log('simula');
+      handleSort();
+      return;
+    }
     console.log('visualizer: useeffect ran');
     setArray(globalArray);
-  }, [globalArray]);
+  }, [globalArray, hasStarted]);
 
   return (
-    <div>
-      <div className='flex justify-evenly '>
-        {/* ALGORITHM DROP DOWN */}
-        <div className='flex flex-col items-center justify-center'>
-          <label>Select Sorting Algorithm</label>
-          <select
-            value={algorithm}
-            onChange={handleAlgorithmChange}
-            className='cursor-pointer p-4 text-md text-gray-800 bg-gray-200'
-          >
-            {algorithmOptions.map((option) => (
-              <option value={option.value} key={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+    <div className='flex flex-col gap-4 p-4 bg-slate-800'>
+      {/* ALGORITHM DROP DOWN */}
+      <div className='flex items-center gap-4'>
+        <label>Select Sorting Algorithm</label>
+        <select
+          value={algorithm}
+          onChange={handleAlgorithmChange}
+          className='cursor-pointer p-4 text-md text-gray-800 bg-gray-200'
+        >
+          {algorithmOptions.map((option) => (
+            <option value={option.value} key={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <Chart array={array} />

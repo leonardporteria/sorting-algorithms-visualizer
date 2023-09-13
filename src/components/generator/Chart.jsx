@@ -10,7 +10,7 @@ const Chart = ({ array }) => {
   }, [array]);
 
   return (
-    <div className='flex gap-1  items-end m-auto p-1 h-72 w-11/12 bg-slate-800 '>
+    <div className='flex gap-1 items-end m-auto p-1 h-72 w-full bg-slate-800 border-2'>
       {newArr.map((bar, index) => (
         <Bar
           key={index}

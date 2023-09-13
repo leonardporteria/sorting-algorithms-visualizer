@@ -48,36 +48,6 @@ const Main = () => {
 
   const handleStart = () => {
     setHasStarted(!hasStarted);
-    switch (algorithm) {
-      case 'Bubble Sort':
-        BubbleSort(array, sortingSpeed, setArray);
-        break;
-      case 'Merge Sort':
-        MergeSort(array, sortingSpeed, setArray);
-        break;
-      case 'Insertion Sort':
-        InsertionSort(array, sortingSpeed, setArray);
-        break;
-      case 'Selection Sort':
-        SelectionSort(array, sortingSpeed, setArray);
-        break;
-      case 'Quick Sort [Lomuto]':
-        break;
-      case 'Quick Sort [Hoare]':
-        break;
-      case 'Heap Sort':
-        break;
-      case 'Cocktail Shaker':
-        CocktailShaker(array, sortingSpeed, setArray);
-        break;
-      case 'Radix Sort':
-        break;
-      case 'Bogo Sort':
-        break;
-      default:
-        setHasStarted(!hasStarted);
-        break;
-    }
   };
 
   // GENERATE A RANDOM ARRAY UPON LOADING
@@ -88,8 +58,8 @@ const Main = () => {
   }, [arrayLength]);
 
   return (
-    <div>
-      <div>
+    <div className='flex flex-col gap-4'>
+      <div className='flex justify-around'>
         {/* // ? ARRAY LENGHT SLIDER */}
         <div className='flex flex-col items-center justify-center'>
           <label>Select Array Lenght</label>
@@ -139,7 +109,12 @@ const Main = () => {
       {/* // ? CHARTS */}
       {chartCount > 0 &&
         Array.from({ length: chartCount }).map((_, index) => (
-          <Visualizer key={index} globalArray={globalArray} />
+          <Visualizer
+            key={index}
+            globalArray={globalArray}
+            sortingSpeed={sortingSpeed}
+            hasStarted={hasStarted}
+          />
         ))}
 
       <div>
