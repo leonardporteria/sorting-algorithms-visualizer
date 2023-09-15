@@ -34,20 +34,20 @@ const Visualizer = ({ globalArray, sortingSpeed, hasStarted }) => {
     setAlgorithm(event.target.value);
   };
   const handleSort = async () => {
-    console.log('sort sort');
-    CocktailShaker(array, sortingSpeed, setArray);
+    console.log(chartIndex);
+    console.log(algorithm);
     switch (algorithm) {
       case 'Bubble Sort':
-        await BubbleSort(array, sortingSpeed, setArray);
+        BubbleSort(array, sortingSpeed, setArray);
         break;
       case 'Merge Sort':
-        await MergeSort(array, sortingSpeed, setArray);
+        MergeSort(array, sortingSpeed, setArray);
         break;
       case 'Insertion Sort':
-        await InsertionSort(array, sortingSpeed, setArray);
+        InsertionSort(array, sortingSpeed, setArray);
         break;
       case 'Selection Sort':
-        await SelectionSort(array, sortingSpeed, setArray);
+        SelectionSort(array, sortingSpeed, setArray);
         break;
     }
   };
@@ -55,12 +55,11 @@ const Visualizer = ({ globalArray, sortingSpeed, hasStarted }) => {
   // GENERATE A RANDOM ARRAY UPON LOADING
   useEffect(() => {
     if (hasStarted) {
-      console.log('simula');
       handleSort();
       return;
     }
     console.log('visualizer: useeffect ran');
-    setArray(globalArray);
+    setArray(JSON.parse(JSON.stringify(globalArray)));
   }, [globalArray, hasStarted]);
 
   return (

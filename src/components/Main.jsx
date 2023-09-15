@@ -42,7 +42,6 @@ const Main = () => {
     for (let i = 0; i < arrayLength; i++) {
       array.push({ value: randomIntFromInterval(5, 250), color: '#ffffff' });
     }
-    console.log(array);
     setGlobalArray(array);
   };
 
@@ -54,7 +53,6 @@ const Main = () => {
   useEffect(() => {
     console.log('main: useeffect ran');
     handleGenerateArray();
-    console.log(globalArray);
   }, [arrayLength]);
 
   return (
